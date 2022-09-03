@@ -48,7 +48,7 @@ public class Velocity : MonoBehaviour
     public void Move()
     {
 
-        velocity = velocity + acceleration * Time.fixedDeltaTime;
+        velocity += acceleration * Time.fixedDeltaTime;
         displacement = velocity * Time.fixedDeltaTime;
         position += displacement;
 
@@ -75,6 +75,6 @@ public class Velocity : MonoBehaviour
     public void ChangeDirection()
     {
         velocity *= 0;
-        acceleration = accelerations[(currentAccelIndex++) % accelerations.Length];
+        acceleration = accelerations[(++currentAccelIndex) % accelerations.Length];
     }
 }
