@@ -6,6 +6,22 @@ using UnityEngine;
     public float x;
     public float y;
 
+    public float magnitude => Mathf.Sqrt(x * x + y * y);
+
+
+    public myVector normalized
+    {
+        get
+        {
+            float distance = magnitude;
+
+            if (distance < 0.0001f)
+            {
+                return new myVector(0, 0);
+            }
+            return new myVector(x / distance, y / distance);
+        }
+    }
 
     public myVector(float x, float y)
     {
@@ -13,6 +29,11 @@ using UnityEngine;
         this.x = x;
         this.y = y;
 
+    }
+
+    public override string ToString()
+    {
+        return $"[{x},{y}]";
     }
 
     public static implicit operator Vector3(myVector origin)
@@ -41,6 +62,23 @@ using UnityEngine;
     {
 
         Debug.DrawLine(new Vector3(origen.x, origen.y, 0), new Vector3(x + origen.x, y + origen.y, 0), color);
+
+    }
+
+    public void Normalize()
+    {
+
+        float magnitudeCache = magnitude;
+        if (magnitudeCache < 0.001)
+        {
+            x = 0;
+            y = 0;
+        }
+        else
+        {
+            x = x / magnitudeCache;
+            y = y / magnitudeCache;
+        }
 
     }
 
